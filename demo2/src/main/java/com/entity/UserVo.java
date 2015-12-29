@@ -5,6 +5,9 @@ package com.entity;
 
 import java.sql.Date;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 import com.enums.Gender;
 
 /**
@@ -15,9 +18,9 @@ import com.enums.Gender;
 public class UserVo {
 
 	String name;
-	
+
 	String email;
-	
+
 	Gender gender;
 
 	public String getName() {

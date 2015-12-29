@@ -12,7 +12,7 @@
 			<th>잔고</th>
 		</tr>
 
-		<tr ng-if='data.content.length > 0' ng-repeat='d in data.content | offset: offset | limitTo : pagingInfo.pagePerCnt'>
+		<tr ng-if='data.content.length > 0' ng-repeat='d in data.content | offset: offset | limitTo : searchFnc.pagingInfo.pagePerCnt'>
 			<td>{{d._id}}</td> 
 			<td><a ui-sref="userDetail({id : d._id, page : pagingInfo.page, offset : pagingInfo.offset })">{{d.name}}</a></td>
 			<td>{{d.gender}}</td>
@@ -34,7 +34,7 @@
 
 <div class="text-center">
     <uib-pagination total-items="totalCnt"
-    	 ng-change="pageChanged()"
+    	 ng-change="searchFnc.pageChanged()"
     	 ng-model="currentPage" 
     	 max-size="pagePerCnt" class="pagination-sm" 
     	 boundary-links="true" 

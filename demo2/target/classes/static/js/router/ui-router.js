@@ -13,10 +13,10 @@ myApp.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
 		controller : 'userListCtrl'
 
 	})
-	.state('write',{
-		url : "^/user/write",
-		templateUrl : '/js/user/write.html'
-		
+	.state('userWrite',{
+		url : "^/users/write",
+		templateUrl : '/js/user/write.html',
+		controller : 'userWriteCtrl'
 	})
 	.state('main', {
 		url : "/",

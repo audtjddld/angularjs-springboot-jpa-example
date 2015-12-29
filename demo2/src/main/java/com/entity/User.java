@@ -3,13 +3,16 @@
  */
 package com.entity;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 
 import com.enums.Gender;
 
@@ -38,9 +41,15 @@ public class User {
 	
 	String email;
 	
+	@Enumerated(EnumType.STRING)
 	Gender gender;
 	
 	Date registerDt;	
+	
+	@PrePersist
+	void prePersist() {
+		registerDt = new Date();
+	}	
 	
 	public Long getUserId() {
 		return userId;

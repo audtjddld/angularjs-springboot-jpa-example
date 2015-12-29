@@ -4,6 +4,9 @@
 package com.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -18,6 +21,7 @@ import com.enums.SchoolKind;
 public class School {
 
 	@Id
+	@GeneratedValue
 	Long schoolId;
 	
 	@ManyToOne
@@ -25,6 +29,7 @@ public class School {
 
 	String name;
 	
+	@Enumerated(EnumType.STRING)
 	SchoolKind schoolKind;
 	
 	public Long getSchoolId() {

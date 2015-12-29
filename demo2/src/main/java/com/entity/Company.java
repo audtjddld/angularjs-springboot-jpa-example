@@ -6,6 +6,7 @@ package com.entity;
 import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -18,6 +19,7 @@ import javax.persistence.ManyToOne;
 public class Company {
 	
 	@Id
+	@GeneratedValue
 	Long CompanyId;
 	
 	@ManyToOne
