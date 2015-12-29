@@ -1,11 +1,13 @@
-myApp.controller(
+myApp
+.controller(
 		'userListCtrl',
 		function($scope, $http, $stateParams, $location, $state, $rootScope) {
 			
 			// 사용자
 			$scope.user = {
 					// 검색
-					search : function() {
+					search : function() 
+					{
 						var params = angular.copy(this.pagingInfo);
 						console.log(params);
 						for (param in params) {
@@ -17,12 +19,12 @@ myApp.controller(
 							}
 						}
 
-						
 						$http.get('/rest/users', {
 							params : params
 						}).success(	function(dataList) {
 									console.log('success');
-									// console.log('reload ' + $scope.pagingInfo.page);
+									// console.log('reload ' +
+									// $scope.pagingInfo.page);
 									$scope.currentPage = this.pagingInfo.page;
 									$scope.pagePerCnt = this.pagingInfo.pagePerCnt;
 									$scope.totalCnt = dataList.length;
@@ -41,18 +43,17 @@ myApp.controller(
 					},
 					
 					// 초기화
-					init : function(){
+					init : function() {
 							// url 파라미터에 있는 내용에 따른 검색 파라미터 설정
 							var obj = $location.search();
 							if (obj.page != undefined) {
 								this.pagingInfo.page = obj.page;
 							}
 							this.search();
-						}
 					},
 					
 					// 페이지 변경
-					pageChanged = function() {
+					pageChanged : function() {
 						// console.log('query ' + $scope.query);
 						$scope.pagingInfo.page = $scope.currentPage;
 						this.search();						
@@ -60,10 +61,10 @@ myApp.controller(
 			};
 			
 			// 초기화
-			$scope.searchFnc.init();
+			$scope.user.init();
 		})
 // 작성 페이지
-.controller('userWriteCtrl', function($scope) {
+.controller('userWriteCtrl', function($scope, $state) {
 
 	// 회사
 	$scope.company = {
@@ -103,6 +104,22 @@ myApp.controller(
 			}
 			this.schools.pop();
 		}
+	}
+	
+	// 등록
+	$scope.submitForm = function (form) {
+		if(form.$valid == false){
+			alert('입력 오류');
+			return ;
+		}
+		// 파라미터
+		var params = angular.copy($scope.user);
+
+		$http.post('/rest/users',params).success(function(){
+			alert('등록되었습니다');
+			$state.go('userList');
+		});
+		
 	}
 
 });

@@ -1,5 +1,7 @@
 package com.main.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class MainController {
+	
+	Logger logger = LoggerFactory.getLogger(getClass());
 	
 	/**
 	 * 메인 페이지
@@ -32,6 +36,7 @@ public class MainController {
 	 */
 	@RequestMapping(value="/main")
 	public String mainContent(){
+		logger.info("asdfasdfasdf");
 		
 		return "main/content";
 	}

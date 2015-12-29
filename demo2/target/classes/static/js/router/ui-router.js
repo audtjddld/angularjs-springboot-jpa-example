@@ -1,4 +1,5 @@
-myApp.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
+myApp
+.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
 
 	// html5 모드
 	$locationProvider.html5Mode(true).hashPrefix('!');
@@ -22,4 +23,5 @@ myApp.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
 		url : "/",
 		templateUrl : '/main'
 	})
+	
 });
