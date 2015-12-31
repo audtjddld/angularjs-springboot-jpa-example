@@ -1,5 +1,3 @@
-<div ng-controller="userListPopupCtrl">
-
 	<table class="table table-bordered">
 		<tr>
 			<th>번호</th>
@@ -12,7 +10,7 @@
 
 		<tr ng-if='data.content.length > 0' ng-repeat='d in data.content | offset: offset | limitTo : searchFnc.pagingInfo.pagePerCnt'>
 			<td>{{d._id}}</td> 
-			<td><a ui-sref="userDetail({id : d._id, page : pagingInfo.page, offset : pagingInfo.offset })">{{d.name}}</a></td>
+			<td>{{d.name}}</td>
 			<td>{{d.gender}}</td>
 			<td>{{d.company}}</td>
 			<td>{{d.email}}</td>
@@ -26,17 +24,14 @@
 			</td>
 		</tr>
 	</table>
-	
-</div>
 
-
-<div class="text-center">
-    <uib-pagination total-items="totalCnt"
-    	 ng-change="searchFnc.pageChanged()"
-    	 ng-model="currentPage" 
-    	 max-size="pagePerCnt" class="pagination-sm" 
-    	 boundary-links="true" 
-    	 rotate="false" 
-    	 num-pages="numPages">
-  	</uib-pagination>	
-</div>
+	<div class="text-center">
+		<uib-pagination total-items="totalCnt"
+			ng-change="searchFnc.pageChanged()"
+			ng-model="currentPage" 
+			max-size="pagePerCnt" class="pagination-sm" 
+			boundary-links="true" 
+			rotate="false" 
+			num-pages="numPages">
+	  	</uib-pagination>	
+	</div>

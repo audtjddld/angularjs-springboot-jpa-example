@@ -3,8 +3,6 @@
  */
 package com.user.service;
 
-import java.util.List;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.company.repository.CompanyRepository;
-import com.entity.Company;
 import com.entity.User;
 import com.entity.UserVo;
 import com.school.repository.SchoolRepository;
@@ -77,11 +74,30 @@ public class UserService {
 		// 사용자 정보 저장
 		userRepository.save(user);
 		// 친구 저장
-		userFriendRepository.save(user.getUserFriends());
+		//userFriendRepository.save(user.getUserFriends());
+		
+		/*
 		// 회사 저장
-		companyRepository.save(user.getCompanies());
+		List<Company> companies = user.getCompanies();
+		companies.stream().forEach(company -> {
+			company.setUser(user);
+		});
+		companyRepository.save(companies);
+		
 		// 학교 저장
-		schoolRepository.save(user.getSchools());
+		List<School> schools = user.getSchools();
+		schools.stream().forEach(school -> {
+			school.setUser(user);
+		});
+		schoolRepository.save(schools);
+		
+		// 친구 저장
+		List<UserFriend> userFriends = user.getUserFriends();
+		userFriends.stream().forEach(friend -> {
+			friend.setUser(user);
+		});
+		userFriendRepository.save(userFriends);
+		*/
 	}
 	
 	/**

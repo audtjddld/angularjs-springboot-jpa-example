@@ -30,7 +30,6 @@ myApp
 									$scope.totalCnt = dataList.length;
 									$scope.offset = ($scope.currentPage - 1) * $scope.pagePerCnt;
 									// console.log($scope.pagingInfo);
-									// 로컬스토리지에 저장
 									$scope.data = dataList;
 									$location.search(this.pagingInfo);
 						})
@@ -64,7 +63,7 @@ myApp
 			$scope.user.init();
 		})
 // 작성 페이지
-.controller('userWriteCtrl', function($scope, $state) {
+.controller('userWriteCtrl', function($scope, $state, $http) {
 
 	// 회사
 	$scope.company = {
@@ -103,7 +102,12 @@ myApp
 				return;
 			}
 			this.schools.pop();
-		}
+		},
+		user : {}
+	}
+	
+	$scope.friend = {
+		friends : [{}]
 	}
 	
 	// 등록
@@ -112,14 +116,25 @@ myApp
 			alert('입력 오류');
 			return ;
 		}
+		// 회사		
+		// $scope.user.companies =	angular.copy($scope.company.companies);
+		// 학교
+		// $scope.user.schools   =	$scope.school.schools;
+		
 		// 파라미터
 		var params = angular.copy($scope.user);
-
-		$http.post('/rest/users',params).success(function(){
-			alert('등록되었습니다');
-			$state.go('userList');
-		});
 		
+		console.log(params);
+		bootbox.confirm("Are you sure?", function(result) {
+			  if(result){
+					$http.post('/rest/users',params).success(function(){
+						alert('등록되었습니다');
+						$scope.userInfo = $scope.user;
+						// $state.go('userList');
+					});				  
+			  }
+		}); 
+
 	}
 
 });

@@ -50,6 +50,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- Query DSL Setting -->
+        <dependency>
+            <groupId>com.mysema.querydsl</groupId>
+            <artifactId>querydsl-apt</artifactId>
+            <version>3.4.3</version>
+        </dependency>		
+		<!-- Query DSL Setting END -->
 	</dependencies>
 	
 	<build>

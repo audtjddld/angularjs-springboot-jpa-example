@@ -36,7 +36,6 @@ public class MainController {
 	 */
 	@RequestMapping(value="/main")
 	public String mainContent(){
-		logger.info("asdfasdfasdf");
 		
 		return "main/content";
 	}

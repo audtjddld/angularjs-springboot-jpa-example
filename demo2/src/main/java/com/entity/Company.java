@@ -2,13 +2,14 @@
  * 
  */
 package com.entity;
-
-import java.sql.Date;
-
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author 정명성
@@ -22,6 +23,7 @@ public class Company {
 	@GeneratedValue
 	Long CompanyId;
 	
+	@JsonIgnore
 	@ManyToOne
 	User user;
 
@@ -29,8 +31,14 @@ public class Company {
 	String name;
 	// 연봉
 	int salary;
+	
 	// 등록일
-	Date regdate;
+	Date registerDt;
+	
+	@PrePersist
+	void prePersist() {
+		registerDt = new Date();
+	}
 	
 	public Long getCompanyId() {
 		return CompanyId;
@@ -64,14 +72,12 @@ public class Company {
 		this.salary = salary;
 	}
 
-	public Date getRegdate() {
-		return regdate;
+	public Date getRegisterDt() {
+		return registerDt;
 	}
 
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
+	public void setRegisterDt(Date registerDt) {
+		this.registerDt = registerDt;
 	}
 
-
-	
 }

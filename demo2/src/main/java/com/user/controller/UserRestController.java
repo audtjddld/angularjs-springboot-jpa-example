@@ -2,6 +2,8 @@ package com.user.controller;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,13 +19,17 @@ import com.entity.User;
 import com.entity.UserVo;
 import com.user.service.UserService;
 
+
+
 /**
  * @author 정명성 create date : 2015. 12. 22.
  *         com.example.user.controller.UserRestController.java
  */
 @RestController
 public class UserRestController {
-
+	
+	private Logger logger = LoggerFactory.getLogger(getClass());
+	
 	@Autowired
 	private UserService userService;
 	

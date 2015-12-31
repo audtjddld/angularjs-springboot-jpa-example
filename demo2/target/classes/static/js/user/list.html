@@ -1,49 +1,45 @@
 
 <div ng-controller="userListCtrl">
-
+	{{data.content}}
 	<h2>회원 리스트</h2>
 	<table class="table table-bordered">
 		<tr>
 			<th>번호</th>
 			<th>이름</th>
 			<th>성별</th>
-			<th>이메일</th>
 			<th>회사</th>
-			<th>잔고</th>
+			<th>연봉</th>
+			<th>이메일</th>
+			<th>학교</th>
 		</tr>
 
-		<tr ng-if='data.content.length > 0' ng-repeat='d in data.content | offset: offset | limitTo : user.pagingInfo.pagePerCnt'>
-			<td>{{d._id}}</td> 
+		<tr ng-if='data.content.length > 0'
+			ng-repeat='d in data.content | offset: offset | limitTo : user.pagingInfo.pagePerCnt'>
+			<td>{{d.userId}}</td>
 			<td><a ui-sref="userDetail({id : d._id, page : user.pagingInfo.page, offset : user.pagingInfo.offset })">{{d.name}}</a></td>
 			<td>{{d.gender}}</td>
-			<td>{{d.company}}</td>
+			<td>{{d.companies[d.companies.length-1].name}}</td>
+			<td>{{d.companies[d.companies.length-1].salary}}</td>
 			<td>{{d.email}}</td>
 			<td>{{d.phone}}</td>
-			<td>{{d.balance}}</td>
 		</tr>
-		
+
 		<tr ng-if='data.content.length == 0'>
 			<td colspan="8">
 				<p class="text-center">등록된 데이터가 없습니다.</p>
 			</td>
 		</tr>
 	</table>
-	
 </div>
 
 
 <div class="text-center">
-    <uib-pagination total-items="totalCnt"
-    	 ng-change="user.pageChanged()"
-    	 ng-model="currentPage" 
-    	 max-size="pagePerCnt" class="pagination-sm" 
-    	 boundary-links="true" 
-    	 rotate="false" 
-    	 num-pages="numPages">
-  	</uib-pagination>	
+	<uib-pagination total-items="totalCnt" ng-change="user.pageChanged()"
+		ng-model="currentPage" max-size="pagePerCnt" class="pagination-sm"
+		boundary-links="true" rotate="false" num-pages="numPages">
+	</uib-pagination>
 </div>
 
 <div class="text-right">
 	<a href="" ui-sref="userWrite" class="btn btn-success">등록</a>
 </div>
-	

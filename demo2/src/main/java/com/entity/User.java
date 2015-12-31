@@ -6,6 +6,7 @@ package com.entity;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -27,14 +28,14 @@ public class User {
 	@Id
 	@GeneratedValue
 	Long userId;
-	
-	@OneToMany(mappedBy="user")
+
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
 	List<UserFriend> userFriends;
 
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
 	List<Company> companies;
-	
-	@OneToMany(mappedBy="user")
+
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
 	List<School> schools;
 
 	String name;
