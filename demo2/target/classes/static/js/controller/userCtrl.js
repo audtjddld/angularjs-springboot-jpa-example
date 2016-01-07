@@ -1,3 +1,6 @@
+
+var obj ;
+
 myApp
 .controller(
 		'userListCtrl',
@@ -61,8 +64,8 @@ myApp
 			$scope.user.init();
 		})
 // 작성 페이지
-.controller('userWriteCtrl', function($scope, $state, $http, toastr) {
-
+.controller('userWriteCtrl', function($scope, $state, $http, toastr, user) {
+ 
 	// 회사
 	$scope.company = {
 			
@@ -122,39 +125,24 @@ myApp
 		
 		// 파라미터
 		var params = angular.copy($scope.user);
-		
 		console.log(params);
-
-		$http.post('/rest/users',params).success(function(data){
-			alert('등록되었습니다');
-			$scope.userInfo = $scope.user;
-			
-			console.log(data);
-			
-			$state.go('userView',{id : data.userId});
-		});				  
+		// 변경한 서비스 사용
+		$scope.user = new user();
+		console.log('$scope.user', $scope.user);
+		console.log('user ' , user);
+		$scope.user.save(params, function () {
+			console.log($scope.user.userId);
+		});
+		//$state.go('userView',{userId : userId});
 	}
 
 })
-.controller('userViewCtrl', function($http, $state, $stateParams, $scope) {
+.controller('userViewCtrl', function($http, $state, $stateParams, $scope, user) {
 	
-	$scope.init = function() {
-		
-		console.log($stateParams);
-		
-		
-		$http.get('/rest/user/' + $stateParams.id).success(function(data) {
-			
-			$scope.userInfo = data;
-			
-			console.log(data);
-			
-		})
-		
-		
-	}
+	console.log($stateParams);
+	$scope.user = new user();
+	$scope.user.load($stateParams.userId);
 	
-	$scope.init();
 	
 })
 ;

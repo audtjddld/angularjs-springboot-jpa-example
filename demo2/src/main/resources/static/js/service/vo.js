@@ -1,5 +1,6 @@
 // 사용자
 myApp.factory('user', ['$http', function($http) {
+	
 	function user(userData) {
 		if(userData) {
 			this.setData(userData);
@@ -10,6 +11,7 @@ myApp.factory('user', ['$http', function($http) {
 			setData : function (userData) {
 				angular.extend(this, userData);
 			},
+			
 			load : function (userId) {
 				var scope = this;
 				$http.get('/rest/user/' + userId).success(function(data) {
@@ -30,11 +32,12 @@ myApp.factory('user', ['$http', function($http) {
 					scope.setData(userData);
 				});
 			},
-			save : function (userData) {
+			save : function (userData, cb) {
 				var scope = this;
 				$http.post('/rest/users', userData).success(function(data) {
 					alert('등록되었습니다.');
 					scope.setData(data);
+					cb();
 				});
 			}
 	}

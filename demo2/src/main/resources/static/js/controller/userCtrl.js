@@ -128,10 +128,11 @@ myApp
 		console.log(params);
 		// 변경한 서비스 사용
 		$scope.user = new user();
-		$scope.user.save(params);
-		
-		console.log($scope.user);
-		
+		console.log('$scope.user', $scope.user);
+		console.log('user ' , user);
+		$scope.user.save(params, function () {
+			console.log($scope.user.userId);
+		});
 		//$state.go('userView',{userId : userId});
 	}
 
