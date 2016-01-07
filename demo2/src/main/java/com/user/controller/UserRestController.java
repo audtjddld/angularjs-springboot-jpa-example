@@ -76,9 +76,9 @@ public class UserRestController {
 	 * @return
 	 */
 	@RequestMapping(value = "/rest/user/{userId}", method = RequestMethod.GET)
-	public void searchUser(@PathVariable Long userId) {
+	public User searchUser(@PathVariable Long userId) {
 
-		userService.findUser(userId);
+		return userService.findUser(userId);
 	}
 
 	/**

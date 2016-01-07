@@ -70,9 +70,9 @@ public class UserService {
 	 * @param user
 	 */
 	@Transactional
-	public void saveUser(User user) {
+	public User saveUser(User user) {
 		// 사용자 정보 저장
-		userRepository.save(user);
+		return userRepository.save(user);
 		// 친구 저장
 		//userFriendRepository.save(user.getUserFriends());
 		

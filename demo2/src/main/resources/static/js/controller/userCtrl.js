@@ -14,7 +14,7 @@ myApp
 							if (param == 'page') {
 								params[param]--;
 								// 2015.12.03 추가
-								if (!params[param])
+								if (!params[param] || params[param] < 1)
 									params[param] = 0;
 							}
 						}
@@ -23,15 +23,13 @@ myApp
 							params : params
 						}).success(	function(dataList) {
 									console.log('success');
-									// console.log('reload ' +
-									// $scope.pagingInfo.page);
-									$scope.currentPage = this.pagingInfo.page;
-									$scope.pagePerCnt = this.pagingInfo.pagePerCnt;
+
+									$scope.currentPage = params.page;
+									$scope.pagePerCnt = params.pagePerCnt;
 									$scope.totalCnt = dataList.length;
 									$scope.offset = ($scope.currentPage - 1) * $scope.pagePerCnt;
-									// console.log($scope.pagingInfo);
 									$scope.data = dataList;
-									$location.search(this.pagingInfo);
+									$location.search(params);
 						})
 					},
 					
@@ -63,7 +61,7 @@ myApp
 			$scope.user.init();
 		})
 // 작성 페이지
-.controller('userWriteCtrl', function($scope, $state, $http) {
+.controller('userWriteCtrl', function($scope, $state, $http, toastr) {
 
 	// 회사
 	$scope.company = {
@@ -113,7 +111,8 @@ myApp
 	// 등록
 	$scope.submitForm = function (form) {
 		if(form.$valid == false){
-			alert('입력 오류');
+			//alert('입력 오류');
+			 toastr.error('입력값이 올바르지 않습니다.', '입력오류');
 			return ;
 		}
 		// 회사		
@@ -125,16 +124,37 @@ myApp
 		var params = angular.copy($scope.user);
 		
 		console.log(params);
-		bootbox.confirm("Are you sure?", function(result) {
-			  if(result){
-					$http.post('/rest/users',params).success(function(){
-						alert('등록되었습니다');
-						$scope.userInfo = $scope.user;
-						// $state.go('userList');
-					});				  
-			  }
-		}); 
 
+		$http.post('/rest/users',params).success(function(data){
+			alert('등록되었습니다');
+			$scope.userInfo = $scope.user;
+			
+			console.log(data);
+			
+			$state.go('userView',{id : data.userId});
+		});				  
 	}
 
-});
+})
+.controller('userViewCtrl', function($http, $state, $stateParams, $scope) {
+	
+	$scope.init = function() {
+		
+		console.log($stateParams);
+		
+		
+		$http.get('/rest/user/' + $stateParams.id).success(function(data) {
+			
+			$scope.userInfo = data;
+			
+			console.log(data);
+			
+		})
+		
+		
+	}
+	
+	$scope.init();
+	
+})
+;

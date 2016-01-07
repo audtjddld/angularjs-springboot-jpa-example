@@ -14,10 +14,15 @@ myApp
 		controller : 'userListCtrl'
 
 	})
-	.state('userWrite',{
+	.state('userWrite', {
 		url : "^/users/write",
 		templateUrl : '/js/user/write.html',
 		controller : 'userWriteCtrl'
+	})
+	.state('userView', {
+		url : "^/users/:id",
+		templateUrl : '/js/user/write.html',
+		controller : 'userViewCtrl'
 	})
 	.state('main', {
 		url : "/",

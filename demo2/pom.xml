@@ -58,6 +58,13 @@
             <version>3.4.3</version>
         </dependency>		
 		<!-- Query DSL Setting END -->
+		<!-- java apns -->
+	    <dependency>
+	         <groupId>com.notnoop.apns</groupId>
+	         <artifactId>apns</artifactId>
+	         <version>1.0.0.Beta6</version>
+	    </dependency>
+		<!-- java apns End -->
 	</dependencies>
 	
 	<build>

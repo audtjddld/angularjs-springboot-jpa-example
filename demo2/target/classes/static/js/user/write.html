@@ -4,7 +4,7 @@
 		{{userInfo}}
 		<form name="form" novalidate="novalidate" ng-submit="submitForm(form)" method="post" >
 		
-			<table class="table table-bordered" id="userWriteInfo" ng-show="userInfo == null">
+			<table class="table table-bordered" id="userWriteInfo" ng-show="user.userId == null">
 				<tr>
 					<th>이름</th>
 					<td><input type="text" ng-model="user.name" maxlength="10" required="required" title="name"/></td>
