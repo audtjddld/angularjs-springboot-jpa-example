@@ -20,7 +20,7 @@ myApp
 		controller : 'userWriteCtrl'
 	})
 	.state('userView', {
-		url : "^/users/:id",
+		url : "^/users/:userId",
 		templateUrl : '/js/user/write.html',
 		controller : 'userViewCtrl'
 	})
