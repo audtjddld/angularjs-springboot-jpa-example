@@ -1,5 +1,5 @@
 // 사용자
-myApp.factory('user', ['$http', function($http) {
+myApp.factory('user', function($http) {
 	
 	function user(userData) {
 		if(userData) {
@@ -15,7 +15,8 @@ myApp.factory('user', ['$http', function($http) {
 			load : function (userId) {
 				var scope = this;
 				$http.get('/rest/user/' + userId).success(function(data) {
-					scope.setData(userData);
+					scope.setData(data);
+					
 				});
 			},
 			delete : function (userId) {
@@ -25,23 +26,28 @@ myApp.factory('user', ['$http', function($http) {
 					this.load(userId);
 				});
 			},
-			update : function (userId, userData) {
+			update : function (userId, data) {
+				
+				console.log(data);
+				
 				var scope = this;
 				$http.put('/rest/user/' + userId).success(function(data) {
 					alert('수정되었습니다.');
-					scope.setData(userData);
+					scope.setData(data);
+
 				});
+				
 			},
-			save : function (userData, cb) {
+			save : function (userData, callback) {
 				var scope = this;
 				$http.post('/rest/users', userData).success(function(data) {
 					alert('등록되었습니다.');
 					scope.setData(data);
-					cb();
+					callback();
 				});
 			}
 	}
 
 	return user;
-}]);
+});
 

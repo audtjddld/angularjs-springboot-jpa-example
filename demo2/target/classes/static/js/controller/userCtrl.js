@@ -66,50 +66,6 @@ myApp
 // 작성 페이지
 .controller('userWriteCtrl', function($scope, $state, $http, toastr, user) {
  
-	// 회사
-	$scope.company = {
-			
-		companies : [{ name : '' , salary : '' }],
-		// 추가
-		add : function() {
-			if (this.companies.length == 5) {
-				return;
-			}
-			this.companies.push({ name : '' , salary : '' });
-		},
-		// 삭제
-		minus : function() {
-			if (this.companies.length == 1) {
-				return;
-			}
-			this.companies.pop();
-		}
-	}
-
-	// 학교
-	$scope.school = {
-		
-		schools : [{ name : '', schoolKind : ''	}],
-		// 추가
-		add : function() {
-			if (this.schools.length == 5) {
-				return;
-			}
-			this.schools.push({ name : '', schoolKind : ''	});
-		},
-		// 삭제
-		minus : function() {
-			if (this.schools.length == 1) {
-				return;
-			}
-			this.schools.pop();
-		},
-		user : {}
-	}
-	
-	$scope.friend = {
-		friends : [{}]
-	}
 	
 	// 등록
 	$scope.submitForm = function (form) {
@@ -129,20 +85,100 @@ myApp
 		// 변경한 서비스 사용
 		$scope.user = new user();
 		console.log('$scope.user', $scope.user);
-		console.log('user ' , user);
+		console.log('user' , user);
 		$scope.user.save(params, function () {
-			console.log($scope.user.userId);
+			// 상세 페이지로 이동
+			$state.go('userView',{userId : $scope.user.userId});
 		});
-		//$state.go('userView',{userId : userId});
+		
 	}
 
 })
+// 상세 컨트롤러
 .controller('userViewCtrl', function($http, $state, $stateParams, $scope, user) {
 	
 	console.log($stateParams);
+	
 	$scope.user = new user();
+	
 	$scope.user.load($stateParams.userId);
 	
 	
+	// 회사
+	$scope.company = {
+			
+		// 추가
+		add : function() {
+			if ($scope.user.companies.length == 5) {
+				return;
+			}
+			$scope.user.companies == null ? [] : $scope.user.companies;
+			
+			$scope.user.companies.push($scope.company);
+			/**/
+			var params = angular.copy($scope.user);
+			$scope.user.update($scope.user.userId, params);
+			/**/
+		},
+		// TODO 삭제
+		minus : function() {
+			if (companies.length == 1) {
+				return;
+			}
+			$scope.user.companies.pop();
+		}
+	}
+
+	// 학교
+	$scope.school = {
+		
+		// 추가
+		add : function() {
+			if ($scope.user.schools.length == 5) {
+				return;
+			}
+			//$scope.user.schools.push({ name : '', schoolKind : ''	});
+			var params = angular.copy($scope.user);
+			$scope.user.update($scope.user.userId, params);
+		},
+		// TODO 삭제
+		minus : function() {
+			if ($scope.user.schools.length == 1) {
+				return;
+			}
+			$scope.user.schools.pop();
+		}
+	}
+
+	
+	$scope.friend = {
+		friends : [{}]
+	}	
+	
+	// 등록
+	$scope.submitForm = function (form) {
+		
+		if(form.$valid == false){
+			//alert('입력 오류');
+			 toastr.error('입력값이 올바르지 않습니다.', '입력오류');
+			return ;
+		}
+		
+		// 파라미터
+		var params = angular.copy($scope.user);
+		console.log(params);
+		// 변경한 서비스 사용
+		$scope.user = new user();
+		console.log('$scope.user', $scope.user);
+		console.log('user' , user);
+		
+		$scope.user.update($scope.user.userId, params, function () {
+			// 상세 페이지로 이동
+			$state.go('userView',{userId : $scope.user.userId});
+		});
+		
+	}	
+	
 })
+
 ;

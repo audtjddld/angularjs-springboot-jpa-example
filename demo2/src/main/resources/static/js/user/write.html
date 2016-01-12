@@ -1,7 +1,6 @@
 
 	<div ng-controller="userWriteCtrl" class="form-group">
 		<h2>사용자 등록</h2>
-		{{userInfo}}
 		<form name="form" novalidate="novalidate" ng-submit="submitForm(form)" method="post" >
 		
 			<table class="table table-bordered" id="userWriteInfo" ng-show="user.userId == null">
@@ -19,135 +18,18 @@
 						<select class="form-control"  ng-model="user.gender">
 							<option value="male" >남자</option>
 							<option value="female">여자</option>
-						</select>					
+						</select>
 					</td>
 				</tr>
 			</table>
 			
-			<div ng-show="user.userId != null"> <!-- 사용자 정보 있을 때 -->
-			
-				<table class="table table-bordered">
-					<tr>
-						<th>이름</th>
-						<td>{{user.name}}</td>
-					</tr>
-					<tr>
-						<th>이메일</th>
-						<td>{{user.email}}</td>
-					</tr>
-					<tr>
-						<th>성별</th>
-						<td>
-							{{user.gender}}
-						</td>
-					</tr>			
-				
-				</table>
-				
-				<table class="table table-bordered">
-					<tr>
-						<th>
-							회사
-						</th>
-						<td>
-							<div class="row" ng-repeat="company in company.companies">
-								<div class="col-md-6">
-									<table class="table">
-										<tr>
-											<th>
-												회사명
-											</th>
-											<td>
-												<input type="text" ng-model="company.name" maxlength="20" />
-											</td>
-										</tr>
-										<tr>
-											<th>
-												연봉
-											</th>
-											<td>
-												<input type="text" ng-model="company.salary" ng-pattern="/^[0-9]+$/" maxlength="5"/> 만원
-											</td>
-										</tr>
-									</table>
-								</div>
-							</div>
-							
-							<mark ng-show="company.companies.length == 1">더이상 삭제 할 수 없습니다.</mark>
-							<mark ng-show="company.companies.length == 5">더이상 추가 할 수 없습니다.</mark>
-							
-							<div class="text-right">
-								<button type="button" class="btn btn-success" ng-click="company.add()">추가</button>
-								<button type="button" class="btn btn-danger" ng-click="company.minus()">삭제</button>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th>학교</th>
-						<td>
-						
-							<div class="row" ng-repeat="school in school.schools">
-								<div class="col-md-6" >
-									<table class="table">
-										<tr>
-											<th>
-												학교이름
-											</th>
-											<td>
-												<input type="text" ng-model="school.name" maxlength="20" />
-											</td>
-										</tr>
-										<tr>
-											<th>
-												학교구분
-											</th>
-											<td ng-init="school.schoolKind == '' ? school.schoolKind = 'elementarySchool' : '' ">
-												<select class="form-control" ng-model="school.schoolKind">
-													<option value="elementarySchool" >초등학교</option>
-													<option value="middleSchool">중학교</option>
-													<option value="highSchool">고등학교</option>
-													<option value="college">전문대</option>
-													<option value="university">대학교</option>
-												</select>
-											</td>
-										</tr>
-									</table>
-								</div>
-							</div>
-							
-							<mark ng-show="school.schools.length == 1">더이상 삭제 할 수 없습니다.</mark>
-							<mark ng-show="school.schools.length == 5">더이상 추가 할 수 없습니다.</mark>
-													
-							<div class="text-right">
-								<button type="button" class="btn btn-success" ng-click="school.add()">추가</button>
-								<button type="button" class="btn btn-danger" ng-click="school.minus()">삭제</button>
-							</div>					
-						</td>
-					</tr>
-					<tr>
-						<th>친구</th>
-						<td> 
-							<div class="row">
-								<div class="col-md-6" ng-repeat="friend in friends">
-									<a class="btn btn-primary" href="javascript:">홍길동</a>
-								</div>
-							</div>
-							<div class="text-right">
-								<button type="button" class="btn btn-info">추가</button>
-							</div>
-						</td>
-					</tr>
-				</table>
-				
-			</div>
-			
 			<div class="row">
 				<div class="text-left col-md-6">
-					<button type="button" class="btn btn-default" ui-sref="userList">목록</button>
+					<button type="button" class="btn btn-default" ui-sref="state.go('userList')">목록</button>
 				</div>
 				<div class="text-right col-md-6">
 					<button type="submit" class="btn btn-success">등록</button>
-				</div>				
+				</div>
 			</div>
 		</form>
 	</div>

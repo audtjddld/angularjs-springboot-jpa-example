@@ -21,7 +21,7 @@ myApp
 	})
 	.state('userView', {
 		url : "^/users/:userId",
-		templateUrl : '/js/user/write.html',
+		templateUrl : '/js/user/modifyView.html',
 		controller : 'userViewCtrl'
 	})
 	.state('main', {

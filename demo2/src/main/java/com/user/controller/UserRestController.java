@@ -82,7 +82,7 @@ public class UserRestController {
 	}
 
 	/**
-	 * 사용자 정보 상세
+	 * 사용자 정보 수정
 	 * 
 	 * @author 정명성 create date : 2015. 12. 22. 설명
 	 * @param userId
@@ -90,7 +90,7 @@ public class UserRestController {
 	 */
 	@RequestMapping(value = "/rest/user/{userId}", method = RequestMethod.PUT)
 	public void updateUser(@PathVariable Long userId, @RequestBody UserVo userVo) throws Exception {
-
+		System.out.println(userVo.getCompanies() + " " + userVo.getSchools());
 		userService.updateUser(userVo, userId);
 	}
 
