@@ -19,7 +19,7 @@
 						</td>
 					</tr>
 				</table>
-
+				{{user}}
 				<table class="table table-bordered">
 					<tr>
 						<th>
@@ -52,9 +52,6 @@
 									</tr>
 								</table>
 
-							<mark ng-show="company.companies.length == 1">더이상 삭제 할 수 없습니다.</mark>
-							<mark ng-show="company.companies.length == 5">더이상 추가 할 수 없습니다.</mark>
-							
 							<div class="text-right">
 								<button type="button" class="btn btn-success" ng-click="company.add()">추가</button>
 							</div>
@@ -119,10 +116,10 @@
 			
 			<div class="row">
 				<div class="text-left col-md-6">
-					<button type="button" class="btn btn-default" ui-sref="state.go('userList')">목록</button>
+					<button type="button" class="btn btn-default" ui-sref="userList">목록</button>
 				</div>
 				<div class="text-right col-md-6">
-					<button type="submit" class="btn btn-success">등록</button>
+					<!-- <button type="submit" class="btn btn-success">등록</button> -->
 				</div>
 			</div>
 		</form>

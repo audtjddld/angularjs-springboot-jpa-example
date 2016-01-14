@@ -11,9 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.company.repository.CompanyRepository;
+import com.company.service.CompanyService;
 import com.entity.User;
 import com.entity.UserVo;
 import com.school.repository.SchoolRepository;
+import com.school.service.SchoolService;
 import com.user.repository.UserRepository;
 import com.userfriend.repository.UserFriendRepository;
 
@@ -31,10 +33,10 @@ public class UserService {
 	private UserFriendRepository userFriendRepository;
 
 	@Autowired
-	private SchoolRepository schoolRepository;
+	private SchoolService schoolService;
 
 	@Autowired
-	private CompanyRepository companyRepository;
+	private CompanyService companyService;
 
 	/**
 	 * 사용자 리스트
@@ -67,25 +69,17 @@ public class UserService {
 	 * @param user
 	 */
 	@Transactional
-	public User saveUser(User user) {
+	public User saveUser(UserVo userVo) {
+		
+		User user = new User();
+		
+		BeanUtils.copyProperties(userVo, user);
+		
 		// 사용자 정보 저장
 		return userRepository.save(user);
 		// 친구 저장
 		// userFriendRepository.save(user.getUserFriends());
 
-		/*
-		 * // 회사 저장 List<Company> companies = user.getCompanies();
-		 * companies.stream().forEach(company -> { company.setUser(user); });
-		 * companyRepository.save(companies);
-		 * 
-		 * // 학교 저장 List<School> schools = user.getSchools();
-		 * schools.stream().forEach(school -> { school.setUser(user); });
-		 * schoolRepository.save(schools);
-		 * 
-		 * // 친구 저장 List<UserFriend> userFriends = user.getUserFriends();
-		 * userFriends.stream().forEach(friend -> { friend.setUser(user); });
-		 * userFriendRepository.save(userFriends);
-		 */
 	}
 
 	/**

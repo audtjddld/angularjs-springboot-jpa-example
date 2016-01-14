@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,15 +58,12 @@ public class UserRestController {
 	 * @return
 	 */
 	@RequestMapping(value = "/rest/users", method = RequestMethod.POST)
-	public User createUser(@RequestBody @Valid User user, BindingResult biresult) throws Exception {
+	public User createUser(@RequestBody @Valid UserVo userVo, BindingResult biresult) throws Exception {
 
 		if(biresult.hasErrors()){
-			throw new Exception("파라미터 Error!! ");
+			throw new BindException(userVo,"파라미터가 올바르지 않습니다.");
 		}
-
-		userService.saveUser(user);
-		
-		return user;
+		return userService.saveUser(userVo);
 	}
 
 	/**
@@ -90,7 +88,7 @@ public class UserRestController {
 	 */
 	@RequestMapping(value = "/rest/user/{userId}", method = RequestMethod.PUT)
 	public void updateUser(@PathVariable Long userId, @RequestBody UserVo userVo) throws Exception {
-		System.out.println(userVo.getCompanies() + " " + userVo.getSchools());
+		// System.out.println(userVo.getCompanies() + " " + userVo.getSchools());
 		userService.updateUser(userVo, userId);
 	}
 

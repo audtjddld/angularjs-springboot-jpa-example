@@ -3,13 +3,7 @@
  */
 package com.entity;
 
-import java.sql.Date;
 import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.OneToMany;
 
 import com.enums.Gender;
 
@@ -25,12 +19,6 @@ public class UserVo {
 	String email;
 
 	Gender gender;
-
-	List<UserFriend> userFriends;
-
-	List<Company> companies;
-
-	List<School> schools;
 	
 	public String getName() {
 		return name;
@@ -56,29 +44,4 @@ public class UserVo {
 		this.gender = gender;
 	}
 
-	public List<UserFriend> getUserFriends() {
-		return userFriends;
-	}
-
-	public void setUserFriends(List<UserFriend> userFriends) {
-		this.userFriends = userFriends;
-	}
-
-	public List<Company> getCompanies() {
-		return companies;
-	}
-
-	public void setCompanies(List<Company> companies) {
-		this.companies = companies;
-	}
-
-	public List<School> getSchools() {
-		return schools;
-	}
-
-	public void setSchools(List<School> schools) {
-		this.schools = schools;
-	}
-
-	
 }

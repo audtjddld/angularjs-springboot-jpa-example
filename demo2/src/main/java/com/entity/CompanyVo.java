@@ -10,6 +10,8 @@ package com.entity;
  */
 public class CompanyVo {
 	
+	// 사용자 아이디
+	long userId;
 	// 회사 이름
 	String name;
 	// 연봉
@@ -29,6 +31,14 @@ public class CompanyVo {
 
 	public void setSalary(int salary) {
 		this.salary = salary;
+	}
+
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 
 }

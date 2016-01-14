@@ -17,7 +17,7 @@
 		<tr ng-if='data.content.length > 0'
 			ng-repeat='d in data.content | offset: offset | limitTo : user.pagingInfo.pagePerCnt'>
 			<td>{{d.userId}}</td>
-			<td><a ui-sref="userView({id : d.userId, page : user.pagingInfo.page, offset : user.pagingInfo.offset })">{{d.name}}</a></td>
+			<td><a ui-sref="userView({userId : d.userId, page : user.pagingInfo.page, offset : user.pagingInfo.offset })">{{d.name}}</a></td>
 			<td>{{d.gender}}</td>
 			<td>{{d.companies[d.companies.length-1].name}}</td>
 			<td>{{d.companies[d.companies.length-1].salary}}</td>

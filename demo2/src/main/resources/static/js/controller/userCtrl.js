@@ -84,8 +84,6 @@ myApp
 		console.log(params);
 		// 변경한 서비스 사용
 		$scope.user = new user();
-		console.log('$scope.user', $scope.user);
-		console.log('user' , user);
 		$scope.user.save(params, function () {
 			// 상세 페이지로 이동
 			$state.go('userView',{userId : $scope.user.userId});
@@ -95,41 +93,52 @@ myApp
 
 })
 // 상세 컨트롤러
-.controller('userViewCtrl', function($http, $state, $stateParams, $scope, user) {
-	
-	console.log($stateParams);
+.controller('userViewCtrl', function($http, $state, $stateParams, $scope, user, toastr) {
 	
 	$scope.user = new user();
 	
-	$scope.user.load($stateParams.userId);
+	$scope.user.load($stateParams.userId, function (){
+		// 데이터가 없으면 작성 페이지로 보내버린다. TODO 아니면 에러페이지로 이동
+		if($scope.user.userId == null){
+			$state.go('userWrite');
+		}
+	});
 	
 	
-	// 회사
+	// view단 회사 객체
 	$scope.company = {
 			
 		// 추가
 		add : function() {
 			if ($scope.user.companies.length == 5) {
+				toastr.warning('5개 이상 추가하실 수 없습니다.');
 				return;
 			}
-			$scope.user.companies == null ? [] : $scope.user.companies;
 			
 			$scope.user.companies.push($scope.company);
-			/**/
-			var params = angular.copy($scope.user);
-			$scope.user.update($scope.user.userId, params);
-			/**/
-		},
-		// TODO 삭제
-		minus : function() {
-			if (companies.length == 1) {
-				return;
-			}
-			$scope.user.companies.pop();
+			
+			var params = angular.copy($scope.company);
+			
+			$scope.user.companyUpdate($scope.user.userId,
+										params, function() {
+					$scope.company.name='';
+					$scope.company.salary='';
+				}, function() {
+					// 오류면 삭제
+					$scope.user.companies.pop();
+				});
+			},
+		minus : function (companyId) {
+			$scope.user.companyDelete($scope.user.userId,
+									  companyId, 
+					function() {
+						$scope.user.load($scope.user.userId);
+					}
+			)
 		}
 	}
 
-	// 학교
+	// view단 학교 객체
 	$scope.school = {
 		
 		// 추가
@@ -150,7 +159,7 @@ myApp
 		}
 	}
 
-	
+	// view단 친구 객체
 	$scope.friend = {
 		friends : [{}]
 	}	
@@ -160,23 +169,21 @@ myApp
 		
 		if(form.$valid == false){
 			//alert('입력 오류');
-			 toastr.error('입력값이 올바르지 않습니다.', '입력오류');
+			toastr.error('입력값이 올바르지 않습니다.', '입력오류');
 			return ;
 		}
 		
 		// 파라미터
 		var params = angular.copy($scope.user);
-		console.log(params);
 		// 변경한 서비스 사용
 		$scope.user = new user();
 		console.log('$scope.user', $scope.user);
 		console.log('user' , user);
 		
-		$scope.user.update($scope.user.userId, params, function () {
-			// 상세 페이지로 이동
-			$state.go('userView',{userId : $scope.user.userId});
+		$scope.user.update($scope.user.userId, params, function() {
+			
 		});
-		
+
 	}	
 	
 })
