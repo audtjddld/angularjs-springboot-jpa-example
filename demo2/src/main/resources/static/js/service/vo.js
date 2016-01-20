@@ -33,18 +33,18 @@ myApp.factory('user', function($http, toastr) {
 				});
 			},
 			// 사용자 정보 수정
-			update : function (userId, data, successCallback, errorCallback) {
+			update : function (userId, data, callback) {
 				company.userId = userId;
 				var scope = this;
 				$http.put('/rest/users', data)
 				.then(function(data) {
 						toastr.success("등록되었습니다.");
 						scope.load(userId);
-						successCallback();
+						callback.success();
 					},
 					function errorCallback(response) {
 						toastr.error("에러가 발생되었습니다.");
-						errorCallback();
+						callback.error();
 					}
 				);
 			},

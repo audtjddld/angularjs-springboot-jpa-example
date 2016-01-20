@@ -110,31 +110,41 @@ myApp
 			
 		// 추가
 		add : function() {
-			if ($scope.user.companies.length == 5) {
-				toastr.warning('5개 이상 추가하실 수 없습니다.');
-				return;
-			}
-			
-			$scope.user.companies.push($scope.company);
-			
-			var params = angular.copy($scope.company);
-			
-			$scope.user.companyUpdate($scope.user.userId,
-										params, function() {
-					$scope.company.name='';
-					$scope.company.salary='';
-				}, function() {
-					// 오류면 삭제
-					$scope.user.companies.pop();
-				});
+				if ($scope.user.companies.length == 5) {
+					toastr.warning('5개 이상 추가하실 수 없습니다.');
+					return;
+				}
+				
+				$scope.user.companies.push($scope.company);
+				
+				var params = angular.copy($scope.company);
+				
+				// 콜백 함수
+				var callback = {
+						
+					success : function() {
+								$scope.company.name='';
+								$scope.company.salary='';
+							}
+					error   : function() {
+								// 오류면 삭제
+								$scope.user.companies.pop();
+							}
+						
+				}
+				
+				$scope.user.companyUpdate($scope.user.userId, params, callback);
 			},
 		minus : function (companyId) {
-			$scope.user.companyDelete($scope.user.userId,
-									  companyId, 
-					function() {
-						$scope.user.load($scope.user.userId);
-					}
-			)
+			
+			var callback = {
+				success : function() {
+					$scope.user.load($scope.user.userId);
+				} 
+			}
+			
+			$scope.user.companyDelete($scope.user.userId, companyId, callback);
+			
 		}
 	}
 
@@ -149,14 +159,8 @@ myApp
 			//$scope.user.schools.push({ name : '', schoolKind : ''	});
 			var params = angular.copy($scope.user);
 			$scope.user.update($scope.user.userId, params);
-		},
-		// TODO 삭제
-		minus : function() {
-			if ($scope.user.schools.length == 1) {
-				return;
-			}
-			$scope.user.schools.pop();
 		}
+	
 	}
 
 	// view단 친구 객체
