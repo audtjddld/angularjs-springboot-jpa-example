@@ -58,11 +58,13 @@ public class UserRestController {
 	 * @return
 	 */
 	@RequestMapping(value = "/rest/users", method = RequestMethod.POST)
-	public User createUser(@RequestBody @Valid UserVo userVo, BindingResult biresult) throws Exception {
+	public User createUser(@RequestBody @Valid UserVo userVo) throws Exception {
 
+		/*
 		if(biresult.hasErrors()){
 			throw new BindException(userVo,"파라미터가 올바르지 않습니다.");
 		}
+		*/
 		return userService.saveUser(userVo);
 	}
 

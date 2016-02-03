@@ -3,7 +3,10 @@
  */
 package com.entity;
 
-import java.util.List;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.enums.Gender;
 
@@ -14,8 +17,11 @@ import com.enums.Gender;
  */
 public class UserVo {
 
+	@NotNull
+	@NotEmpty
 	String name;
 
+	@Email
 	String email;
 
 	Gender gender;
