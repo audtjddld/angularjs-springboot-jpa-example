@@ -125,7 +125,7 @@ myApp
 					success : function() {
 								$scope.company.name='';
 								$scope.company.salary='';
-							}
+							},
 					error   : function() {
 								// 오류면 삭제
 								$scope.user.companies.pop();
