@@ -1,25 +1,34 @@
 package com.example;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.nio.charset.Charset;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
-
-import org.json.simple.JSONObject;
 
 import com.Demo2Application;
 
@@ -29,6 +38,8 @@ import com.Demo2Application;
 @WebAppConfiguration
 public class Demo2ApplicationTests {
 
+	Logger logger = LoggerFactory.getLogger(getClass());
+	
 	@Autowired
 	WebApplicationContext wac;
 	
@@ -82,6 +93,13 @@ public class Demo2ApplicationTests {
 					.getResponse();
 	}
 	
+	/**
+	 * 벨리데이션 체크
+	 * @author 정명성
+	 * create date : 2016. 2. 4.
+	 * 설명
+	 * @throws Exception
+	 */
 	@Test
 	public void test3ValidationTest() throws Exception {
 		
