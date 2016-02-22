@@ -30,6 +30,11 @@ public class AdviceLogging {
 		
 		logger.info("method path : " + joinPoint.getSignature());
 		
+		/**
+		 * 코드 변경 
+		 * 참고사이트 : http://stackoverflow.com/questions/27659523/retrieve-parameter-value-from-proceedingjoinpoint
+		 * method parameter 가져오기 부분 추가
+		 */
 		Object params[] = joinPoint.getArgs();
 		for(Object param : params) {
 			if(param instanceof UserVo) {
