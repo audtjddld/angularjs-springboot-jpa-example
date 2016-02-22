@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import com.entity.UserVo;
 
 /**
+ * spring boot AOP example
  * @author 정명성
  * create date : 2015. 12. 29.
  * com.aspect.AdviceLogging.java
