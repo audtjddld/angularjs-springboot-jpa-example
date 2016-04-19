@@ -51,4 +51,23 @@ public class AdviceLogging {
 		 */
 	}
 	
+	
+	/**
+	 * annotation을 이용한 Logging
+	 * @param joinPoint
+	 */
+	@Before("@within(Loggings)")
+	public void loggingAdvice2(JoinPoint joinPoint) {
+	
+		logger.info("annotation method path : " + joinPoint.getSignature());
+		
+		Object params[] = joinPoint.getArgs();
+		for(Object param : params) {
+			if(param instanceof UserVo) {
+				logger.info(ToStringBuilder.reflectionToString((UserVo)param));
+			}
+		}
+
+	}
+
 }

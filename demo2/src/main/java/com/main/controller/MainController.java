@@ -5,11 +5,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.aspect.Loggings;
+
 /**
  * @author 정명성
  * create date : 2015. 12. 24.
  * com.example.main.controller.MainController.java
  */
+@Loggings
 @Controller
 public class MainController {
 	

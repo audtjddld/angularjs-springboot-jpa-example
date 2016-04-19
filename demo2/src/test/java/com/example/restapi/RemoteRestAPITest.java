@@ -28,7 +28,7 @@ import static org.junit.Assert.assertNotNull;
  * create date : 2016. 2. 4.
  * com.example.restapi.RemoteRestAPITest.java
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RemoteRestAPITest {
 	
 	Logger logger = LoggerFactory.getLogger(getClass());
@@ -54,7 +54,7 @@ public class RemoteRestAPITest {
 	 * 설명
 	 * @throws Exception
 	 */
-	@Test
+	//@Test
 	public void test1RestTemplate() throws Exception {
 
 	
@@ -92,7 +92,7 @@ public class RemoteRestAPITest {
 	 * 설명
 	 * @throws Exception
 	 */
-	@Test
+	//@Test
 	public void test2GetMachines() throws Exception {
 		
 		assertNotNull(access_token);
