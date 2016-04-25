@@ -1,0 +1,44 @@
+
+<div ng-controller="systemLogCtrl">
+	<h2>시스템 로그</h2>
+	<table class="table table-bordered">
+		<tr>
+			<th>systemLogId</th>
+			<th>title</th>
+			<th>className</th>
+			<th>methodName</th>
+			<th>행동</th>
+			<th>사용자Id</th>
+			<th>사용자Ip</th>
+			<th>처리시간 (ms)</th>
+			<th>등록일</th>
+		</tr>
+
+		<tr ng-if='domains.content.length > 0'	ng-repeat='d in domains.content'>
+			<td>{{d.logId}}</td>
+			<td>{{d.title}}</td>
+			<td>{{d.className}}</td>
+			<td>{{d.methodName}}</td>
+			<td>{{d.action}}</td>
+			<td>{{d.regId}}</td>
+			<td>{{d.regIp}}</td>
+			<th>{{d.processTime}} ms</th>
+			<td>{{d.regDate | date : 'yyyy-MM-dd'}}</td>
+		</tr>
+
+		<tr ng-if='domains.content.length == 0'>
+			<td colspan="7">
+				<p class="text-center">등록된 데이터가 없습니다.</p>
+			</td>
+		</tr>
+	</table>
+</div>
+
+
+<div class="text-center">
+	<uib-pagination total-items="totalCnt" ng-change="user.pageChanged()"
+		ng-model="currentPage" max-size="pagePerCnt" class="pagination-sm"
+		boundary-links="true" rotate="false" num-pages="numPages">
+	</uib-pagination>
+</div>
+
