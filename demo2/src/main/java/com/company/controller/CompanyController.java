@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.company.service.CompanyService;
-import com.entity.vo.CompanyVo;
+import com.entity.CompanyVo;
 
 /**
  * @author 정명성

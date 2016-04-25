@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.entity.vo;
+package com.entity;
 
 import javax.validation.constraints.NotNull;
 

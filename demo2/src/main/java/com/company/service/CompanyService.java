@@ -14,8 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.company.repository.CompanyRepository;
 import com.entity.Company;
+import com.entity.CompanyVo;
 import com.entity.User;
-import com.entity.vo.CompanyVo;
 import com.user.repository.UserRepository;
 
 /**

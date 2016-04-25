@@ -10,11 +10,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.anntation.ProcessInfo;
+import com.company.repository.CompanyRepository;
 import com.company.service.CompanyService;
 import com.entity.User;
-import com.entity.vo.UserVo;
-import com.enums.Actions;
+import com.entity.UserVo;
+import com.school.repository.SchoolRepository;
 import com.school.service.SchoolService;
 import com.user.repository.UserRepository;
 import com.userfriend.repository.UserFriendRepository;
@@ -45,7 +45,6 @@ public class UserService {
 	 * @param pageable
 	 * @return
 	 */
-	@ProcessInfo(title = "사용자조회", actions = Actions.select)
 	public Page<User> userList(Pageable pageable) {
 
 		return userRepository.findAll(pageable);
@@ -71,11 +70,11 @@ public class UserService {
 	 */
 	@Transactional
 	public User saveUser(UserVo userVo) {
-
+		
 		User user = new User();
-
+		
 		BeanUtils.copyProperties(userVo, user);
-
+		
 		// 사용자 정보 저장
 		return userRepository.save(user);
 		// 친구 저장
