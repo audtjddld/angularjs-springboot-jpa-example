@@ -1,12 +1,13 @@
 /**
  * 
  */
-package com.entity;
+package com.entity.vo;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.entity.User;
 import com.enums.SchoolKind;
 
 /**

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.entity;
+package com.entity.vo;
 
 /**
  * @author 정명성
