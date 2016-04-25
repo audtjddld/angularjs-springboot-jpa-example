@@ -28,5 +28,9 @@ myApp
 		url : "/",
 		templateUrl : '/main'
 	})
-	
+	.state('systemLog', {
+		url : "/systemLogs",
+		templateUrl : "/js/systemlog/list.html",
+		controller : "systemLogCtrl"
+	})
 });

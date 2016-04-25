@@ -50,7 +50,7 @@ public class User {
 	@PrePersist
 	void prePersist() {
 		registerDt = new Date();
-	}	
+	}
 	
 	public Long getUserId() {
 		return userId;
